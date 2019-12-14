@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"bufio"
+	"strings"
 )
 
 type Monster struct {
@@ -27,11 +28,11 @@ func userDecision(choices int, input string){
 
 	if choices == 3 {
 		switch input { 
-		case "a":
+		case "1":
 			fmt.Println("You chose to attack")
-		case "b":
+		case "2":
 			fmt.Println("You chose to defend")
-		case "":
+		case "3":
 			fmt.Println("You chose to run")
 		default:
 			fmt.Println("No options selected")
@@ -47,14 +48,22 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 	var next string
 	var err error
-	for true {
+	var exit bool
+	for exit == false {
 		fmt.Println("What will you do next?")
 		userOptions()
+		print(">>")
 		next, err = reader.ReadString('\n')
 		if err != nil {	
 			fmt.Fprintln(os.Stderr, err)
 		}
-		userDecision(3, next)
+		if strings.TrimRight(next, "\r\n") == "exit"{
+			exit = true
+		} else{
+			userDecision(3, strings.TrimRight(next, "\r\n"))
+		}
+		
+
 	}
 	fmt.Println("Goodbye!")
 }
