@@ -16,39 +16,45 @@ type Player struct {
 	Health, Level	int
 }
 
-func userOptions() int{
+func userOptions() {
 	fmt.Println("1. Attack\n2. Defend\n3. Run" )
-	var choices = 3
-	return choices
+	//var choices = 3
 }
 
+
 func userDecision(choices int, input string){
+//	fmt.Println("This is the userDecision Function input: " + input)
+
 	if choices == 3 {
-		switch input {
-		case "1":
+		switch input { 
+		case "a":
 			fmt.Println("You chose to attack")
-		case "2":
+		case "b":
 			fmt.Println("You chose to defend")
-		case "3":
+		case "":
 			fmt.Println("You chose to run")
+		default:
+			fmt.Println("No options selected")
 		}
 	}	else {
 		fmt.Println("Error: Incorrect number of choices")
 	}
+
 }
 
-func main() {
-	var exit = false
-	reader := bufio.NewReader(os.Stdin)
 
-	for exit != true {
-		var next = ""
+func main() {
+	reader := bufio.NewReader(os.Stdin)
+	var next string
+	var err error
+	for true {
 		fmt.Println("What will you do next?")
-		var numChoices = userOptions()
-		next, _ = reader.ReadString('\n')
-		if next == "exit" {
-			exit = true
+		userOptions()
+		next, err = reader.ReadString('\n')
+		if err != nil {	
+			fmt.Fprintln(os.Stderr, err)
 		}
-		userDecision(numChoices, next)
+		userDecision(3, next)
 	}
+	fmt.Println("Goodbye!")
 }
