@@ -64,28 +64,24 @@ func run(user Player, enemy Monster) {
 func userOptions() {
 	fmt.Println("1. Attack\n2. Defend\n3. Run\n4. Exit")
 }
-func userDecision(choices int, input string, user Player, monster Monster) {
-	if choices == 3 {
-		switch input {
-		case "1":
-			fmt.Println("You chose to attack the", monster.Name)
-			attack(user, monster)
-			fmt.Println("Monster Health:", monster.Health)
-			if monster.Health <= 0 {
-				fmt.Println("You defeated the", monster.Name)
-			}
-
-		case "2":
-			fmt.Println("You chose to defend")
-
-		case "3":
-			fmt.Println("You chose to run")
-			run(user, monster)
-		default:
-			fmt.Println("No options selected")
+func userDecision(input string, user Player, monster Monster) {
+	switch input {
+	case "1":
+		fmt.Println("You chose to attack the", monster.Name)
+		attack(user, monster)
+		fmt.Println("Monster Health:", monster.Health)
+		if monster.Health <= 0 {
+			fmt.Println("You defeated the", monster.Name)
 		}
-	} else {
-		fmt.Println("Error: Incorrect number of choices")
+
+	case "2":
+		fmt.Println("You chose to defend")
+
+	case "3":
+		fmt.Println("You chose to run")
+		run(user, monster)
+	default:
+		fmt.Println("No options selected")
 	}
 }
 
@@ -117,7 +113,7 @@ func main() {
 		if nextChoice == "exit" || nextChoice == "4" {
 			exit = true
 		} else {
-			userDecision(3, nextChoice, user, monsterObj)
+			userDecision(nextChoice, user, monsterObj)
 		}
 		clearScreen()
 	}
