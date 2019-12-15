@@ -5,16 +5,15 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"os/exec"
 	"strings"
 )
-
-//---------------
 
 //Character Structs
 type Monster struct {
 	Name           string
 	Health, Attack int
-	//Monster character for game
+	//Monster character
 }
 
 type Player struct {
@@ -45,23 +44,21 @@ func initMonster() Monster {
 	return monster
 }
 
-//---------------
-
 // Action Section
-func attack(user Player) {
-	fmt.Println(user.Name, "attacked for", rand.Intn(user.Attack-0), "damage!")
+func attack(user Player, monster Monster) {
+	attackValue := rand.Intn(user.Attack - 1)
+	fmt.Println(user.Name, "attacked for", attackValue, "damage!")
+	monster.Health = monster.Health - attackValue
 }
 
 func run(user Player, enemy Monster) {
 	if rand.Intn(2-0) == 0 {
-		fmt.Println("You got away!")
+		fmt.Println("You got away from the", enemy)
 	} else {
-		fmt.Println("You couldn't get away!")
+		fmt.Println("You couldn't get away from the", enemy)
 	}
 
 }
-
-//---------------
 
 //Main menu functionality
 func userOptions() {
@@ -72,7 +69,11 @@ func userDecision(choices int, input string, user Player, monster Monster) {
 		switch input {
 		case "1":
 			fmt.Println("You chose to attack the", monster.Name)
-			attack(user)
+			attack(user, monster)
+			fmt.Println("Monster Health:", monster.Health)
+			if monster.Health <= 0 {
+				fmt.Println("You defeated the", monster.Name)
+			}
 
 		case "2":
 			fmt.Println("You chose to defend")
@@ -97,7 +98,9 @@ func readUserInput() string {
 	return strings.TrimRight(next, "\r\n")
 }
 
-//---------------
+func clearScreen() {
+	exec.Command("cmd", "/c", "cls")
+}
 
 func main() {
 	var exit bool
@@ -116,7 +119,7 @@ func main() {
 		} else {
 			userDecision(3, nextChoice, user, monsterObj)
 		}
-
+		clearScreen()
 	}
 	fmt.Println("Goodbye!")
 }
