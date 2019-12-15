@@ -5,17 +5,8 @@ import (
 	"os"
 	"bufio"
 	"strings"
+	user "lib/userDef"
 )
-
-type Monster struct {
-	Name	string
-	Health	int
-}
-
-type Player struct {
-	Name	string
-	Health, Level	int
-}
 
 func userOptions() {
 	fmt.Println("1. Attack\n2. Defend\n3. Run\n4. Exit")
@@ -47,7 +38,11 @@ func readUserInput() string{
 	return strings.TrimRight(next, "\r\n")
 }
 
+
+
 func main() {
+	userName := readUserInput()
+	user.initUser(userName)
 	var exit bool
 	for exit == false {
 		fmt.Println("What will you do next?")
