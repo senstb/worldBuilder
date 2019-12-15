@@ -9,41 +9,6 @@ import (
 	"strings"
 )
 
-//Character Structs
-type Monster struct {
-	Name           string
-	Health, Attack int
-	//Monster character
-}
-
-type Player struct {
-	Name                  string
-	Health, Attack, Level int
-	//Player character
-}
-
-//---------------
-
-//Character initialization
-func initUser(name string) Player {
-	var player = Player{
-		Name:   name,
-		Health: rand.Intn(20 - 5),
-		Attack: rand.Intn(5 - 1),
-		Level:  1,
-	}
-	return player
-}
-
-func initMonster() Monster {
-	var monster = Monster{
-		Name:   "Skeleton",
-		Health: rand.Intn(10 - 1),
-		Attack: rand.Intn(3 - 0),
-	}
-	return monster
-}
-
 // Action Section
 func attack(user Player, monster Monster) {
 	attackValue := rand.Intn(user.Attack - 1)
@@ -115,7 +80,6 @@ func main() {
 		} else {
 			userDecision(nextChoice, user, monsterObj)
 		}
-		clearScreen()
 	}
 	fmt.Println("Goodbye!")
 }
