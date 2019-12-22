@@ -10,7 +10,7 @@ import (
 
 //Main menu functionality
 func userOptions() {
-	fmt.Println("1. Attack\n2. Defend\n3. Run\n4. Exit")
+	fmt.Println("1. Attack\n2. Heal\n3. Run\n4. Exit")
 }
 
 func userDecision(input string, user *Player, monster *Monster) bool {
@@ -25,8 +25,8 @@ func userDecision(input string, user *Player, monster *Monster) bool {
 		}
 		return false
 	case "2":
-		fmt.Println("You chose to defend")
-		defend(user, monster)
+		fmt.Println("You chose to heal")
+		heal(user, monster)
 		return false
 	case "3":
 		fmt.Println("You chose to run")
@@ -50,7 +50,7 @@ func monsterDecision(monster *Monster, user *Player) bool {
 		}
 		return false
 	} else if monster.Health > (monster.Health / 4) {
-		monsterDefend(monster, user)
+		monsterHeal(monster, user)
 		return false
 	} else {
 		return monsterRun(monster, user)
