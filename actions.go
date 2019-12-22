@@ -27,7 +27,7 @@ func run(user *Player, monster *Monster) bool {
 func monsterAttack(monster *Monster, user *Player) {
 	attackValue := rand.Intn(monster.Attack - 0)
 	fmt.Println(monster.Name, "attacked for", attackValue, "damage!")
-	monster.Health = user.Health - attackValue
+	user.Health = user.Health - attackValue
 }
 
 func monsterDefend(monster *Monster, user *Player) {
