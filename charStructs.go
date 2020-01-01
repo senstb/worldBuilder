@@ -71,7 +71,7 @@ func initUser(name string) *player {
 
 func initMonster() *monster {
 	monster := &monster{
-		character: character{Health: rand.Intn(10 - 1), Attack: rand.Intn(3 - 0)},
+		character: character{Name: "Monster", Health: rand.Intn(15 - 5), Attack: rand.Intn(4 - 1)},
 		Type:      "Skeleton",
 	}
 	return monster
