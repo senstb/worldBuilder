@@ -24,7 +24,7 @@ func userDecision(input string, user *player, monster *monster) bool {
 		}
 		return false
 	case "2":
-		heal(user, monster)
+		user.heal()
 		return false
 	case "3":
 		return run(user, monster)
@@ -47,7 +47,7 @@ func monsterDecision(monster *monster, user *player) bool {
 		}
 		return false
 	} else if monster.getHealth() > (monster.getHealth() / 4) {
-		monsterHeal(monster, user)
+		monster.heal()
 		return false
 	} else {
 		return monsterRun(monster, user)

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 )
 
@@ -45,6 +46,18 @@ type Player interface {
 	Level() int
 }
 
+func (c *character) attack(b *character) {
+	attackValue := rand.Intn(c.getAttack() - 1)
+	fmt.Println(c.getName(), "attacked for", attackValue, "damage!")
+	b.setHealth(attackValue)
+}
+
+func (c *character) heal() {
+	healValue := rand.Intn(c.getAttack()-1) * -1
+	fmt.Println(c.getName(), "healed for", (healValue * -1), "damage!")
+	c.setHealth(healValue)
+}
+
 func (c *character) getName() string {
 	return c.Name
 }
@@ -71,7 +84,7 @@ func initUser(name string) *player {
 
 func initMonster() *monster {
 	monster := &monster{
-		character: character{Name: "Monster", Health: rand.Intn(15 - 5), Attack: rand.Intn(4 - 1)},
+		character: character{Name: "monster", Health: rand.Intn(15 - 5), Attack: rand.Intn(4 - 1)},
 		Type:      "Skeleton",
 	}
 	return monster
