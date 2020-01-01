@@ -18,7 +18,7 @@ type Character interface {
 	getAttack() int
 	getHealth() int
 	getName() string
-	//setHealth(damage int)
+	setHealth(damage int)
 }
 
 //Monster struct

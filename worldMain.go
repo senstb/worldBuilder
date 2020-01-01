@@ -16,7 +16,6 @@ func userOptions() {
 func userDecision(input string, user *player, monster *monster) bool {
 	switch strings.ToLower(input) {
 	case "1":
-		fmt.Println("You chose to attack the", monster.getName())
 		attack(user, monster)
 		//fmt.Println("Monster Health:", monster.Health)
 		if monster.getHealth() <= 0 {
@@ -25,11 +24,9 @@ func userDecision(input string, user *player, monster *monster) bool {
 		}
 		return false
 	case "2":
-		fmt.Println("You chose to heal")
 		heal(user, monster)
 		return false
 	case "3":
-		fmt.Println("You chose to run")
 		return run(user, monster)
 	case "4", "exit":
 		fmt.Println("Goodbye!")
