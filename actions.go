@@ -5,44 +5,44 @@ import (
 	"math/rand"
 )
 
-func attack(user *Player, monster *Monster) {
-	attackValue := rand.Intn(user.Attack - 1)
-	fmt.Println(user.Name, "attacked for", attackValue, "damage!")
-	monster.Health = monster.Health - attackValue
+func attack(user *player, monster *monster) {
+	attackValue := rand.Intn(user.getAttack() - 1)
+	fmt.Println(user.getName(), "attacked for", attackValue, "damage!")
+	monster.setHealth(attackValue)
 }
 
-func heal(user *Player, monster *Monster) {
-	healValue := rand.Intn(user.Attack - 1)
-	user.Health = user.Health + healValue
+func heal(user *player, monster *monster) {
+	healValue := rand.Intn(user.getAttack()-1) * -1
 	fmt.Println("You healed for", healValue, "damage!")
+	user.setHealth(healValue)
 }
 
-func run(user *Player, monster *Monster) bool {
+func run(user *player, monster *monster) bool {
 	if rand.Intn(2-0) == 0 {
-		fmt.Println(user.Name, "got away from the", monster.Name)
+		fmt.Println(user.getName(), "got away from the", monster.getName())
 		return true
 	}
-	fmt.Println(user.Name, "couldn't get away from the", monster.Name)
+	fmt.Println(user.getName(), "couldn't get away from the", monster.getName())
 	return false
 }
 
-func monsterAttack(monster *Monster, user *Player) {
-	attackValue := rand.Intn(monster.Attack - 0)
-	fmt.Println(monster.Name, "attacked for", attackValue, "damage!")
-	user.Health = user.Health - attackValue
+func monsterAttack(monster *monster, user *player) {
+	attackValue := rand.Intn(monster.getAttack() - 0)
+	fmt.Println(monster.getName(), "attacked for", attackValue, "damage!")
+	user.setHealth(attackValue)
 }
 
-func monsterHeal(monster *Monster, user *Player) {
-	healValue := rand.Intn(monster.Attack - 1)
-	monster.Health = monster.Health + healValue
-	fmt.Println(monster.Name, "healed for", healValue, "damage!")
+func monsterHeal(monster *monster, user *player) {
+	healValue := rand.Intn(monster.getAttack()-1) * -1
+	fmt.Println(monster.getName(), "healed for", healValue, "damage!")
+	monster.setHealth(healValue)
 }
 
-func monsterRun(monster *Monster, user *Player) bool {
+func monsterRun(monster *monster, user *player) bool {
 	if rand.Intn(2-0) == 0 {
-		fmt.Println(monster.Name, "got away from", user.Name)
+		fmt.Println(monster.getName(), "got away from", user.getName())
 		return true
 	}
-	fmt.Println(monster.Name, "couldn't get away from", user.Name)
+	fmt.Println(monster.getName(), "couldn't get away from", user.getName())
 	return false
 }

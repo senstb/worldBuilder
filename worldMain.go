@@ -13,14 +13,14 @@ func userOptions() {
 	fmt.Println("1. Attack\n2. Heal\n3. Run\n4. Exit")
 }
 
-func userDecision(input string, user *Player, monster *Monster) bool {
+func userDecision(input string, user *player, monster *monster) bool {
 	switch strings.ToLower(input) {
 	case "1":
-		fmt.Println("You chose to attack the", monster.Name)
+		fmt.Println("You chose to attack the", monster.getName())
 		attack(user, monster)
 		//fmt.Println("Monster Health:", monster.Health)
-		if monster.Health <= 0 {
-			fmt.Println("You defeated the", monster.Name)
+		if monster.getHealth() <= 0 {
+			fmt.Println("You defeated the", monster.getName())
 			return true
 		}
 		return false
@@ -40,16 +40,16 @@ func userDecision(input string, user *Player, monster *Monster) bool {
 	}
 }
 
-func monsterDecision(monster *Monster, user *Player) bool {
-	if monster.Health > (monster.Health / 2) {
+func monsterDecision(monster *monster, user *player) bool {
+	if monster.getHealth() > (monster.getHealth() / 2) {
 		monsterAttack(monster, user)
 		//fmt.Println(user.Name, "health:", user.Health)
-		if user.Health <= 0 {
-			fmt.Println("You were defeated by the", monster.Name)
+		if user.getHealth() <= 0 {
+			fmt.Println("You were defeated by the", monster.getName())
 			return true
 		}
 		return false
-	} else if monster.Health > (monster.Health / 4) {
+	} else if monster.getHealth() > (monster.getHealth() / 4) {
 		monsterHeal(monster, user)
 		return false
 	} else {
@@ -79,18 +79,18 @@ func main() {
 	clearScreen()
 	user := initUser(userName)
 	monsterObj := initMonster()
-	fmt.Println(user.Name, "has entered the world...")
+	fmt.Println(user.getName(), "has entered the world...")
 	for exit == false {
-		fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n")
-		fmt.Println(user.Name, "health:", user.Health, "\t", monsterObj.Name, "health:", monsterObj.Health)
+		//		fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n")
+		fmt.Println(user.getName(), "health:", user.getHealth(), "\t", monsterObj.getName(), "health:", monsterObj.getHealth())
 		fmt.Println("What will  you do next?")
 		userOptions()
 		print(">>")
 		nextChoice := readUserInput()
 		clearScreen()
-		exit = userDecision(nextChoice, &user, &monsterObj)
+		exit = userDecision(nextChoice, user, monsterObj)
 		if exit == false {
-			exit = monsterDecision(&monsterObj, &user)
+			exit = monsterDecision(monsterObj, user)
 		}
 	}
 }
