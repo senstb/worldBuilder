@@ -6,7 +6,7 @@ import (
 )
 
 func attack(user *player, monster *monster) {
-	attackValue := rand.Intn(user.getAttack() - 1)
+	attackValue := rand.Intn(user.getAttack())
 	fmt.Println(user.getName(), "attacked for", attackValue, "damage!")
 	monster.setHealth(attackValue)
 }
@@ -21,7 +21,7 @@ func run(user *player, monster *monster) bool {
 }
 
 func monsterAttack(monster *monster, user *player) {
-	attackValue := rand.Intn(user.getAttack() - 1)
+	attackValue := rand.Intn(user.getAttack())
 	fmt.Println("The", monster.getName(), "attacked for", attackValue, "damage!")
 	user.setHealth(attackValue)
 }
