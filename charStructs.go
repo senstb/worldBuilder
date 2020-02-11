@@ -28,16 +28,11 @@ type monster struct {
 	Type string
 }
 
+/*
 //Monster Interface
 type Monster interface {
 	Character
 	Type() string
-}
-
-//Player struct
-type player struct {
-	character
-	Level int
 }
 
 //Player Interface
@@ -45,8 +40,15 @@ type Player interface {
 	Character
 	Level() int
 }
+*/
 
-func (c *character) attack(b *character) {
+//Player struct
+type player struct {
+	character
+	Level int
+}
+
+func (c *character) makeAttack(b *character) {
 	attackValue := rand.Intn(c.getAttack() - 1)
 	fmt.Println(c.getName(), "attacked for", attackValue, "damage!")
 	b.setHealth(attackValue)
