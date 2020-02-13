@@ -13,34 +13,9 @@ func userOptions() {
 	fmt.Println("1. Attack\n2. Heal\n3. Run\n4. Exit")
 }
 
-func userDecision(input string, user *player, monster *monster) bool {
-	switch strings.ToLower(input) {
-	case "1":
-		attack(user, monster)
-		//fmt.Println("Monster Health:", monster.Health)
-		if monster.getHealth() <= 0 {
-			fmt.Println("You defeated the", monster.getName())
-			return true
-		}
-		return false
-	case "2":
-		user.heal()
-		return false
-	case "3":
-		return run(user, monster)
-	case "4", "exit":
-		fmt.Println("Goodbye!")
-		return true
-	default:
-		fmt.Println("No options selected")
-		return false
-	}
-}
-
 func monsterDecision(monster *monster, user *player) bool {
 	if monster.getHealth() > (monster.getHealth() / 2) {
 		monsterAttack(monster, user)
-		//fmt.Println(user.Name, "health:", user.Health)
 		if user.getHealth() <= 0 {
 			fmt.Println("You were defeated by the", monster.getName())
 			return true
@@ -71,23 +46,22 @@ func clearScreen() {
 
 func main() {
 	var exit bool
-	fmt.Println("Who is the next adventurer?")
+
+	entryMenu := initMenu("start")
+	mainMenu := initMenu("main")
+	entryMenu.printMenu()
 	userName := readUserInput()
 	clearScreen()
 	user := initUser(userName)
-	monsterObj := initMonster()
 	fmt.Println(user.getName(), "has entered the world...")
 	for exit == false {
-		//		fmt.Println("\n\n\n\n\n\n\n\n\n\n\n\n\n")
-		fmt.Println(user.getName(), "health:", user.getHealth(), "\t", monsterObj.getName(), "health:", monsterObj.getHealth())
 		fmt.Println("What will  you do next?")
-		userOptions()
-		print(">>")
+		mainMenu.printMenu()
+
 		nextChoice := readUserInput()
 		clearScreen()
-		exit = userDecision(nextChoice, user, monsterObj)
-		if exit == false {
-			exit = monsterDecision(monsterObj, user)
-		}
+
+		exit = mainAction(nextChoice, user)
+
 	}
 }

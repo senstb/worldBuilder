@@ -28,16 +28,11 @@ type monster struct {
 	Type string
 }
 
+/*
 //Monster Interface
 type Monster interface {
 	Character
 	Type() string
-}
-
-//Player struct
-type player struct {
-	character
-	Level int
 }
 
 //Player Interface
@@ -45,17 +40,24 @@ type Player interface {
 	Character
 	Level() int
 }
+*/
 
-func (c *character) attack(b *character) {
+//Player struct
+type player struct {
+	character
+	Level int
+}
+
+func (c *character) makeAttack(b *character) {
 	attackValue := rand.Intn(c.getAttack() - 1)
 	fmt.Println(c.getName(), "attacked for", attackValue, "damage!")
-	b.setHealth(attackValue)
+	b.setHealth(c.getHealth() - attackValue)
 }
 
 func (c *character) heal() {
 	healValue := rand.Intn(c.getAttack()-1) * -1
 	fmt.Println(c.getName(), "healed for", (healValue * -1), "damage!")
-	c.setHealth(healValue)
+	c.setHealth(c.getHealth() + healValue)
 }
 
 func (c *character) getName() string {
@@ -70,8 +72,8 @@ func (c *character) getHealth() int {
 	return c.Health
 }
 
-func (c *character) setHealth(damage int) {
-	c.Health = c.getHealth() - damage
+func (c *character) setHealth(newHealth int) {
+	c.Health = newHealth
 }
 
 func initUser(name string) *player {
