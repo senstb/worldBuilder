@@ -47,6 +47,8 @@ func clearScreen() {
 func main() {
 	var exit bool
 
+	//Uncomment to start API defined in api.go
+	//startAPI()
 	entryMenu := initMenu("start")
 	mainMenu := initMenu("main")
 	entryMenu.printMenu()

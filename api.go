@@ -92,6 +92,7 @@ func deleteEvent(w http.ResponseWriter, r *http.Request) {
 func startAPI() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/", homeLink)
+	router.HandleFunc("/", homeLink).Methods("GET")
 	router.HandleFunc("/event", createEvent).Methods("POST")
 	router.HandleFunc("/events", getAllEvents).Methods("GET")
 	router.HandleFunc("/events/{id}", getOneEvent).Methods("GET")
