@@ -45,13 +45,14 @@ func clearScreen() {
 }
 
 func main() {
-	var exit bool
+	//var exit bool
+	//entryMenu := initMenu("start")
+	//mainMenu := initMenu("main")
 
 	//Uncomment to start API defined in api.go
-	//startAPI()
-	entryMenu := initMenu("start")
-	mainMenu := initMenu("main")
-	entryMenu.printMenu()
+	startAPI()
+
+	/*entryMenu.printMenu()
 	userName := readUserInput()
 	clearScreen()
 	user := initUser(userName)
@@ -65,5 +66,5 @@ func main() {
 
 		exit = mainAction(nextChoice, user)
 
-	}
+	}*/
 }
