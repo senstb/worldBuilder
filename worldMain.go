@@ -44,6 +44,7 @@ func clearScreen() {
 	cmd.Run()
 }
 
+//Reset main function
 func main() {
 	//var exit bool
 	//entryMenu := initMenu("start")
