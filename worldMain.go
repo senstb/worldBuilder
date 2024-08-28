@@ -39,7 +39,7 @@ func readUserInput() string {
 }
 
 func clearScreen() {
-	cmd := exec.Command("cmd", "/c", "cls")
+	cmd := exec.Command("clear")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
